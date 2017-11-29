@@ -20,7 +20,6 @@ class RA {
      */
     run(options) {
         this._executeLine(0)
-        console.log(this.memory)
         return this.memory[0]
     }
 
