@@ -1,0 +1,13 @@
+{
+  "name": "regauto",
+  "version": "1.0.0",
+  "description": "Register Automat",
+  "main": "app.js",
+  "author": "zitrone44",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "pegjs": "^0.10.0",
+    "webpack": "^3.8.1"
+  }
+}

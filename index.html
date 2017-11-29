@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ZR</title>
+        <script src="out.js"></script>
+    </head>
+    <body>
+        <h1>Zitrone's Registerautomaten</h1>
+        <textarea id="input" rows="10"></textarea>
+        <br/>
+        <button id="run">Run</button>
+        <script>
+            document.getElementById('run').addEventListener('click', (e) => {
+                e.preventDefault()
+                const schema = document.getElementById('input').value
+                const parsed = RA.parser.parse(schema)
+                const ra = new RA.RA(parsed)
+                const result = ra.run()
+                alert(result)
+            })
+        </script>
+    </body>
+</html>
