@@ -9,5 +9,8 @@
   "dependencies": {
     "pegjs": "^0.10.0",
     "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "build": "pegjs -o parser.js parser.txt && webpack register.js out.js"
   }
 }
