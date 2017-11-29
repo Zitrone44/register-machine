@@ -13,10 +13,14 @@
             document.getElementById('run').addEventListener('click', (e) => {
                 e.preventDefault()
                 const schema = document.getElementById('input').value
-                const parsed = RA.parser.parse(schema)
-                const ra = new RA.RA(parsed)
-                const result = ra.run()
-                alert(result)
+                try {
+                    const parsed = RA.parser.parse(schema)
+                    const ra = new RA.RA(parsed)
+                    const result = ra.run()
+                    alert(result)
+                } catch (err) {
+                    alert(err)
+                }
             })
         </script>
     </body>
