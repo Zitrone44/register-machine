@@ -1,7 +1,8 @@
 start = Automate
 Automate = commandLine:CommandLine+
-CommandLine = command:Command " " parameter:Parameter '\n' {return {command, parameter}}
-Command = command:("Load"/"Store"/"Add"/"Sub"/"Mul"/"Div"/"Goto"/"JZero")
-Parameter = NumParameter/VarParameter
+CommandLine = command:Command '\n'? {return command}
+Command = command:(NumCommand/VarCommand) 
+NumCommand = command:("Load"/"Goto"/"JZero") " " parameter:NumParameter {return {command, parameter}}
+VarCommand = command:("Load"/"Store"/"Add"/"Sub"/"Mul"/"Div") " " parameter:VarParameter {return {command, parameter}}
 NumParameter = num:([1-9][0-9]*) {return num.join('')}
 VarParameter = "[" varName:NumParameter "]" {return "[" + varName + "]"}
