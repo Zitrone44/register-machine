@@ -49,8 +49,8 @@ class RA {
                 break
             case 'Sub':
                 this.memory[0] = (Number.parseInt(this.memory[0]) - Number.parseInt(this.memory[match[1]])).toString() 
-                if (this.memory[0] < 0) {
-                    this.memory[0] = 0
+                if (Number.parseInt(this.memory[0]) < 0) {
+                    this.memory[0] = "0"
                 }
                 break
             case 'Mul':
