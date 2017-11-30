@@ -101,9 +101,6 @@ class RA {
      */
     _executeLine (lineNumber) {
         const line = this.syntax[lineNumber]
-        if(this.debug) {
-            console.log({lineNumber, line, memory: this.memory}) 
-        }
         const match = line.parameter.match(/\[([0-9]+)\]/)
         switch(line.command) {
             case 'Load':
@@ -141,6 +138,9 @@ class RA {
                 break
             default:
                 throw new Error('Unknown Command ' + line.command)
+        }
+        if(this.debug) {
+            console.log({lineNumber, line, memory: JSON.parse(JSON.stringify(this.memory))}) 
         }
         if(lineNumber !== this.syntax.length -1) {
             return this._executeLine(lineNumber + 1)                
