@@ -75,17 +75,19 @@ class RA {
     /**
      * Creats a New RA
      * @param {Object[]} syntax 
+     * @param {boolean} debug
      * @returns {RA} An Ra
      */
-    constructor(syntax) {
+    constructor(syntax, debug) {
         this.syntax = syntax
+        this.debug = debug
         this.memory = {0: 0}
     }
 
     /**
      * Runs the RA
      * @param {Object} options
-     * @return {Int} Final Memory State
+     * @return {number} Final Memory State
      */
     run(options) {
         this._executeLine(0)
@@ -95,10 +97,13 @@ class RA {
     /**
      * Execute a Line
      * @private
-     * @param {Int} lineNumber 
+     * @param {number} lineNumber 
      */
     _executeLine (lineNumber) {
         const line = this.syntax[lineNumber]
+        if(this.debug) {
+            console.log({lineNumber, line, memory: this.memory}) 
+        }
         const match = line.parameter.match(/\[([0-9]+)\]/)
         switch(line.command) {
             case 'Load':

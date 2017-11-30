@@ -15,7 +15,7 @@
                 const schema = document.getElementById('input').value
                 try {
                     const parsed = RA.parser.parse(schema)
-                    const ra = new RA.RA(parsed)
+                    const ra = new RA.RA(parsed, window.debug || false)
                     const result = ra.run()
                     alert(result)
                 } catch (err) {
