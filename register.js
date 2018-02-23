@@ -1,4 +1,3 @@
-
 /**
  * Represents a RA
  */
@@ -80,9 +79,4 @@ class RA {
 
 }
 
-const exporter = {RA, parser: require('./parser')}
-
-if (window) {
-    window.RA = exporter
-}
-module.exports = exporter
+module.exports = {RA, parser: require('./parser')}
