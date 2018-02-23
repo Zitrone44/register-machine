@@ -2,29 +2,36 @@
 <html>
     <head>
         <title>ZR</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/open-iconic@1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha384-wWci3BOzr88l+HNsAtr3+e5bk9qh5KfjU6gl/rbzfTYdsAVHBEbxB33veLYmFg/a" crossorigin="anonymous">
+        <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="out.js"></script>
     </head>
     <body>
-        <h1>Zitrone's Registerautomaten</h1>
-        <div id="info"></div>        
-        <textarea id="input" rows="20" cols="40"></textarea>
-        <br/>
-        <button id="run">Ausführen</button>
-        <button id="save">Speichern</button>        
+        <div class="container">
+            <h1>Zitrone's Registerautomaten</h1>
+            <div id="info"></div>        
+            <textarea id="input" rows="20" cols="40" class="form-control"></textarea>
+            <br/>
+            <button id="run" class="btn btn-primary">Ausführen <span class="oi oi-media-play"></span></button>
+            <button id="save" class="btn btn-default">Speichern <span class="oi oi-cloud-upload"></span></button>
+        </div>      
         <script>
             if (location.hash) {
                 fetch('https://api.github.com/gists/' + location.hash.slice(1)).then((req) => {
                     return req.json()
                 }).then((res) => {
-                    document.getElementById('input').value = res.files['ra.txt'].content
-                    document.getElementById('info').append(res.description)
+                    $('#input').val(res.files['ra.txt'].content)
+                    $('#info').val(res.description)
                 }).catch((err) => {
                     alert(err)
                 })
             }
-            document.getElementById('run').addEventListener('click', (e) => {
+            $('#run').click((e) => {
                 e.preventDefault()
-                const schema = document.getElementById('input').value
+                const schema = $('#input').val()
                 try {
                     const parsed = RA.parser.parse(schema)
                     const ra = new RA.RA(parsed, window.debug || false)
@@ -34,11 +41,11 @@
                     alert(err)
                 }
             })
-            document.getElementById('save').addEventListener('click', (e) => {
+            $('#save').click((e) => {
                 e.preventDefault()
                 fetch('https://api.github.com/gists', {method: 'POST', body: JSON.stringify({description: prompt('Name des RAs eingeben'),
                 public: false,
-                files: {"ra.txt": {content: document.getElementById('input').value}}})}).then((req) => {
+                files: {"ra.txt": {content: $('#input').val()}}})}).then((req) => {
                     return req.json()
                 }).then((res) => {
                     location = `${location.origin}${location.pathname}#${res.id}`
