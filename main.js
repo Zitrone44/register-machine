@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import RA from './register.js'
+import {alert} from './dialog.js'
 
 $(document).ready(() => {
     if (location.hash) {
@@ -19,9 +20,9 @@ $(document).ready(() => {
             const parsed = RA.parser.parse(schema)
             const ra = new RA.RA(parsed, window.debug || false)
             const result = ra.run()
-            alert(result)
+            alert(result, "Ergebnis")
         } catch (err) {
-            alert(err)
+            alert(err, "Ein Fehler ist aufgetreten")
         }
     })
     $('#save').click((e) => {

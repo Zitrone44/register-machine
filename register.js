@@ -79,4 +79,4 @@ class RA {
 
 }
 
-module.exports = {RA, parser: require('./parser')}
+export default {RA, parser: require('./parser')}
